@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="{{ asset('registration_assets') }}/css/all.min.css">
         <link rel="stylesheet" href="{{ asset('registration_assets') }}/css/style.css">
@@ -16,9 +17,9 @@
                 <form action="#">
                     <h1>Follow our Social Media</h1>
                     <div class="social-container">
-                        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/fahimhossainmunna12/" class="social"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.linkedin.com/in/fahim-hossain-munna-004a81219/" class="social"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                     <span>Only Admin can register a user!</span>
                     {{-- <input type="text" placeholder="Name" />
