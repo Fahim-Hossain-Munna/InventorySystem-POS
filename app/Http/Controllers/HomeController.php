@@ -25,4 +25,19 @@ class HomeController extends Controller
     {
         return view('home.home');
     }
+
+    public function profile ()
+    {
+        return view('dashboard.profile');
+    }
+
+    public function settings (Request $request)
+    {
+        return view('dashboard.settings');
+    }
+
+    public function settings_insert (Request $request)
+    {
+        return $request;
+    }
 }

@@ -22,3 +22,6 @@ Auth::routes(['register' => false]);
 
 Route::get('/', [App\Http\Controllers\FrontendController::class, 'root'])->name('welcome');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
+Route::get('/settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
+Route::post('/settings.update', [App\Http\Controllers\HomeController::class, 'settings_update'])->name('settings.update');
