@@ -16,6 +16,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
+
                 </div>
             </div>
         </div>
@@ -24,22 +25,19 @@
 @endsection
 
 @section('footer_script')
-<script>
-//     Swal.fire({
-//     position: 'top-end',
-//     icon: 'success',
-//     title: 'Your work has been saved',
-//     showConfirmButton: false,
-//     timer: 1500
-//   })
-    // if(session('submit')){
-    //     Swal.fire({
-    //     position: 'top-end',
-    //     icon: 'success',
-    //     title: 'Your work has been saved',
-    //     showConfirmButton: false,
-    //     timer: 1500
-    // })
-    // }
-</script>
+
+
+        @if (session()->has('login_success'))
+            <script>
+                Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: "{{ auth()->user()->name }} {{ session('login_success') }}",
+                showConfirmButton: false,
+                timer: 5500
+              })
+            </script>
+        @endif
+
+
 @endsection

@@ -238,13 +238,22 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="user-area dropdown float-right">
-                        <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{-- logout button add --}}
+                    <div class="dropdown for-notification">
+                        <a href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();" style="padding: 0px 10px;">
+                         <i class="fa fa-sign-out"></i>Logout</a>
+                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </div>
+                    {{-- logout button add --}}
+                    <div class="user-area dropdown">
+                        <a href="#" class="dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
                             <img class="user-avatar rounded-circle" src="{{ asset('dashboard_assets') }}/images/admin.jpg" alt="User Avatar">
                         </a>
-
-                        <div class="user-menu dropdown-menu">
+                        {{-- <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
 
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
@@ -258,7 +267,7 @@
                              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                        </div>
+                        </div> --}}
                     </div>
 
                 </div>
