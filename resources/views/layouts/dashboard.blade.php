@@ -274,7 +274,7 @@
             <div class="footer-inner bg-white">
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        Copyright &copy; {{ now()->format('Y') }} <span class="text-success">weXpart</span> Admin Designed by <a class="text-success" href="https://github.com/Fahim-Hossain-Munna">Fahim & Jubayer</a>
+                        Copyright &copy; {{ now()->format('Y') }} <span class="text-success">weXpart</span> Admin Designed by <a class="text-success" href="https://www.youtube.com/channel/UCQcQHJ_jNmCK5SXgmZqWkVg">Fahim & Jubayer</a>
                     </div>
                 </div>
             </div>
