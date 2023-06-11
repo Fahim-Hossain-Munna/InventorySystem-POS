@@ -24,7 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        session(['login_success' => 'login successful']);
         return view('home.home');
     }
 
@@ -38,8 +37,8 @@ class HomeController extends Controller
         return view('dashboard.settings');
     }
 
-    public function settings_insert (Request $request)
-    {
-        return $request;
-    }
+    // public function settings_insert (Request $request)
+    // {
+    //     return $request;
+    // }
 }

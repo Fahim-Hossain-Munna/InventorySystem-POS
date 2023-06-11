@@ -10,34 +10,40 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     {{ __('You are logged in!') }}
 
                 </div>
+
             </div>
+
         </div>
     </div>
 </div>
 @endsection
 
 @section('footer_script')
+{{-- login success msg once in per session --}}
 
-
-        @if (session()->has('login_success'))
-            <script>
-                Swal.fire({
+<script>
+    jQuery(window).load(function () {
+        if (sessionStorage.getItem('dontLoad') == null) {
+            Swal.fire({
                 position: 'top-end',
                 icon: 'success',
-                title: "{{ auth()->user()->name }} {{ session('login_success') }}",
+                title: "{{ auth()->user()->name }} successfully login",
                 showConfirmButton: false,
                 timer: 5500
-              })
-            </script>
-        @endif
+            });
+            sessionStorage.setItem('dontLoad', 'true');
+        }
+    });
+</script>
+
 
 
 @endsection
