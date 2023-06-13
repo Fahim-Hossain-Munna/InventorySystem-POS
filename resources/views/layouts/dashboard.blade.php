@@ -88,10 +88,10 @@
                     <li class="{{ Request::is('home') ? 'active' : '' }}">
                         <a href="{{ route('home') }}"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
                     </li>
-                    <li class="menu-title">Elements</li>
+                    <li class="menu-title">USER INFO</li>
                     <!-- /.menu-title -->
                     <li class="{{ Request::is('profile') ? 'active' : '' }}">
-                        <a href="{{ route('profile') }}"> <i class="menu-icon fa fa-cogs"></i>Profile</a>
+                        <a href="{{ route('profile') }}"> <i class="menu-icon fa fa-user-circle"></i>Profile</a>
                         {{-- <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
@@ -161,12 +161,21 @@
                     <li class="menu-title">Extras</li>
                     <!-- /.menu-title -->
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">
-                        <a href="{{ route('settings') }}"> <i class="menu-icon fa fa-glass"></i>Settings</a>
+                        <a href="{{ route('settings') }}"> <i class="menu-icon fa fa-wrench"></i>Settings</a>
                         {{-- <ul class="sub-menu children dropdown-menu">
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Login</a></li>
                             <li><i class="menu-icon fa fa-sign-in"></i><a href="page-register.html">Register</a></li>
                             <li><i class="menu-icon fa fa-paper-plane"></i><a href="pages-forget.html">Forget Pass</a></li>
                         </ul> --}}
+                    </li>
+                    <li class="{{ Request::is('logout') ? 'active' : '' }}">
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                         document.getElementById('logout-form').submit();">
+                            <i class="menu-icon fa fa-sign-out"></i>Logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+
                     </li>
                 </ul>
             </div><!-- /.navbar-collapse -->
