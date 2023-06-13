@@ -81,26 +81,25 @@
                                 /* margin-left: -30px; */
                                 cursor: pointer;
                                 position: absolute;
-                                top: 26%;
+                                top: 47%;
                                 left: 92%;
                             }
                         </style>
-                        <form action="{{ route('settings.update', auth()->user()->id) }}" method="post">
+                        <form action="{{ route('password.update') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="" class="control-label mb-2">Current Paaaword</label>
-                                <input class="form-control mb-2 form_position" type="password" name="current_password" id="passwordone" placeholder="Current Paaaword"/>
-
+                                <input class="form-control mb-2 form_position" type="password" name="current_password" id="" placeholder="Current Paaaword"/>
                             </div>
 
                             <div class="form-group has-success">
                                 <label for="" class="control-label mb-2">New Paaaword</label>
-                                <input name="new_password" class="form-control mb-2 form_position" type="password" value="" placeholder="New Paaaword" id="passwordone">
-                                <i class="bi bi-eye-slash" id="togglePasswordone"></i>
+                                <input name="new_password" class="form-control mb-2 form_position" type="password" value="" placeholder="New Paaaword" id="password">
+                                <i class="bi bi-eye-slash" id="togglePassword"></i>
                             </div>
                             <div class="form-group">
                                 <label for="" class="control-label mb-2">Confirm Paaaword</label>
-                                <input name="confirm_password" class="form-control mb-2 form_position" type="password" value="" placeholder="Confirm Paaaword">
+                                <input name="new_confirm_password" class="form-control mb-2 form_position" type="password" value="" placeholder="Confirm Paaaword">
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-primary btn-lg mt-2">Large button</button>
@@ -136,11 +135,34 @@
             })
     </script>
 @endif
-<script>
-    const togglePassword = document.querySelector("#togglePasswordone");
-    const password = document.querySelector("#passwordone");
 
-        togglePasswordone.addEventListener("click", function () {
+@if (session('password_update'))
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+            })
+
+            Toast.fire({
+            icon: 'success',
+            title: '{{ session('password_update') }}'
+            })
+    </script>
+@endif
+
+
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#password");
+
+        togglePassword.addEventListener("click", function () {
             // toggle the type attribute
             const type = password.getAttribute("type") === "password" ? "text" : "password";
             password.setAttribute("type", type);
@@ -148,24 +170,7 @@
             // toggle the icon
             this.classList.toggle("bi-eye");
         });
-
-    // const togglePassword = document.querySelector("#togglePasswordone");
-    //     const password = document.querySelector("#passwordone");
-
-    //     togglePassword.addEventListener("click", function () {
-    //         // toggle the type attribute
-    //         const type = password.getAttribute("type") === "password" ? "text" : "password";
-    //         password.setAttribute("type", type);
-
-    //         // toggle the icon
-    //         this.classList.toggle("bi-eye");
-    //     });
-
-    //     // prevent form submit
-    //     const form = document.querySelector("form");
-    //     form.addEventListener('submit', function (e) {
-    //         e.preventDefault();
-    //     });
 </script>
+
 @endsection
 
