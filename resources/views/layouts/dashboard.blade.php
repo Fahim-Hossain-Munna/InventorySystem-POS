@@ -17,6 +17,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
@@ -273,11 +274,21 @@
                         </form>
                     </div>
                     {{-- logout button add --}}
+
                     <div class="user-area dropdown">
-                        <a href="#" class="dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img class="user-avatar rounded-circle"
-                                src="{{ asset('dashboard_assets') }}/images/admin.jpg" alt="User Avatar">
-                        </a>
+                        @if (auth()->user()->picture)
+                            <a href="{{ route('profile') }}" class="dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="user-avatar rounded-circle"
+                                    src="{{ asset('uploads/profile_photos') }}\{{ auth()->user()->picture }}" alt="profile">
+                            </a>
+                        @else
+                            <a href="{{ route('profile') }}" class="dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img class="user-avatar rounded-circle"
+                                    src="{{ asset('uploads/profile_photos') }}\defult_photo.jpg" alt="profile">
+                            </a>
+                        @endif
+
+
                         {{-- <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
 

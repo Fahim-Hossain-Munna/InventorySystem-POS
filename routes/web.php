@@ -18,15 +18,21 @@ use Illuminate\Support\Facades\Auth;
 //     return view('welcome');
 // });
 
-Route::middleware(['web','prevent_back_logout'])->group(function(){
+    Route::middleware(['web','prevent_back_logout'])->group(function(){
+    Auth::routes(['register' => false]);
 
-Auth::routes(['register' => false]);
+    // FrontendController
+    Route::get('/', [App\Http\Controllers\FrontendController::class, 'root'])->name('welcome');
 
-Route::get('/', [App\Http\Controllers\FrontendController::class, 'root'])->name('welcome');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/profile', [App\Http\Controllers\HomeController::class, 'profile'])->name('profile');
-Route::get('/settings', [App\Http\Controllers\HomeController::class, 'settings'])->name('settings');
-Route::post('/settings.update', [App\Http\Controllers\HomeController::class, 'settings_update'])->name('settings.update');
+    // HomeController
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+    // ProfileController
+    Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'profile'])->name('profile');
+
+    // ProfileSettingsController
+    Route::get('/profile/settings', [App\Http\Controllers\ProfileSettingsController::class, 'settings'])->name('settings');
+    Route::post('/profile/settings/update/{id}', [App\Http\Controllers\ProfileSettingsController::class, 'settings_update'])->name('settings.update');
 
 
 });
