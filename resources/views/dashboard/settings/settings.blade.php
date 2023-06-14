@@ -54,8 +54,43 @@
                                 <input id="" name="image" type="file" class="form-control mb-2" value="">
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary btn-lg mt-2">Large button</button>
+                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">confirm</button>
                             </div>
+                            <!-- Modal start -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header d-flex justify-content-end">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <style>
+                                        .modal-body i{
+                                            position: none !important;
+                                            top: 50px;
+                                            left: 50%;
+                                            font-size: 60px;
+                                            transform: translateX(-50%);
+                                            color: #FF0060;
+                                        }
+                                        .modal-body p{
+                                            margin-top: 120px;
+                                            font-size: 30px;
+                                            font-weight: 800;
+                                            color: #116A7B;
+                                        }
+                                    </style>
+                                    <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                    <p class="text-center">Are you confirm to change.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Save changes</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- Modal end -->
                         </form>
                     </div>
                 </div>
@@ -107,8 +142,43 @@
                                 <input name="new_confirm_password" class="form-control mb-2 form_position" type="password" value="" placeholder="Confirm Paaaword">
                             </div>
                             <div>
-                                <button type="submit" class="btn btn-primary btn-lg mt-2">Large button</button>
+                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModalpassword">confirm</button>
                             </div>
+                             <!-- Modal start -->
+                             <div class="modal fade" id="exampleModalpassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header d-flex justify-content-end">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <style>
+                                        .modal-body i{
+                                            position: none !important;
+                                            top: 50px;
+                                            left: 50%;
+                                            font-size: 60px;
+                                            transform: translateX(-50%);
+                                            color: #FF0060;
+                                        }
+                                        .modal-body p{
+                                            margin-top: 120px;
+                                            font-size: 30px;
+                                            font-weight: 800;
+                                            color: #116A7B;
+                                        }
+                                    </style>
+                                    <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                    <p class="text-center">confirm to change password.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-success">Save changes</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            <!-- Modal end -->
                         </form>
                     </div>
                 </div>

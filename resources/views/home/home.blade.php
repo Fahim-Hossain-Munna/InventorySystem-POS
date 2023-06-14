@@ -33,11 +33,14 @@
     jQuery(window).load(function () {
         if (sessionStorage.getItem('dontLoad') == null) {
             Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: "{{ auth()->user()->name }} successfully login",
-                showConfirmButton: false,
-                timer: 5500
+            icon: 'success',
+            title: "Thank '{{ auth()->user()->name }}' successfully login",
+            showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+            }
             });
             sessionStorage.setItem('dontLoad', 'true');
         }
