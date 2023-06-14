@@ -33,7 +33,7 @@ class EmployeeController extends Controller
         if($request->hasFile('picture')){
             $new_img =  $request->city."_".str::random(5).now()->format("h_m_d").".".$request->file('picture')->getClientOriginalExtension();
             $img = Image::make($request->file('picture'));
-            $img->resize(800, 800, function ($constraint) {
+            $img->resize(360, 360, function ($constraint) {
                 $constraint->aspectRatio();
             })->save(base_path('public/uploads/employe_photos/'.$new_img), 80, 'jpg');
 

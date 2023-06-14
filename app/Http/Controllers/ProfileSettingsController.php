@@ -29,7 +29,7 @@ class ProfileSettingsController extends Controller
          if($request->hasFile('image')){
             $new_img = auth()->user()->name."_".auth()->user()->id."_".str::random(5).now()->format("h_m_d").".".$request->file('image')->getClientOriginalExtension();
             $img = Image::make($request->file('image'));
-            $img->resize(800, 800, function ($constraint) {
+            $img->resize(360, 360, function ($constraint) {
                 $constraint->aspectRatio();
             })->save(base_path('public/uploads/profile_photos/'.$new_img), 80, 'jpg');
 
