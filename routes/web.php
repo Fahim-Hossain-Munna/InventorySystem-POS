@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Auth;
     // ProfileSettingsController
     Route::get('/profile/settings', [App\Http\Controllers\ProfileSettingsController::class, 'settings'])->name('settings');
     Route::post('/profile/settings/update/{id}', [App\Http\Controllers\ProfileSettingsController::class, 'settings_update'])->name('settings.update');
-    Route::post('/profile/password/update', [App\Http\Controllers\ProfileSettingsController::class, 'password_update'])->name('password.update');
+    Route::post('/profile/password/update/{id}', [App\Http\Controllers\ProfileSettingsController::class, 'password_update'])->name('password.update');
 
     // EmployeesController
     Route::get('/employee', [App\Http\Controllers\EmployeeController::class, 'employee'])->name('employee');

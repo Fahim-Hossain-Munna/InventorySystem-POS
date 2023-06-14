@@ -292,19 +292,19 @@
                         </div>
                     </div>
                     {{-- logout button add --}}
-                    <div class="dropdown for-notification">
+                    {{-- <div class="dropdown for-notification">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();
                          document.getElementById('logout-form').submit();" style="padding: 0px 10px;">
                             <i class="fa fa-sign-out"></i>Logout</a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
-                    </div>
+                    </div> --}}
                     {{-- logout button add --}}
 
-                    <div class="user-area dropdown">
+                    <div class="user-area">
                         @if (auth()->user()->picture)
-                            <a href="{{ route('profile') }}" class="dropdown-toggle active" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a href="{{ route('profile') }}" class="dropdown-toggle active" aria-expanded="false">
                                 <img class="user-avatar rounded-circle"
                                     src="{{ asset('uploads/profile_photos') }}\{{ auth()->user()->picture }}" alt="profile">
                             </a>

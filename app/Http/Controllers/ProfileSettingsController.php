@@ -40,16 +40,23 @@ class ProfileSettingsController extends Controller
         return back()->with('sucessfully_update', "Your Profile Update Sucessfully!");
     }
 
-    public function password_update (Request $request)
+    public function password_update (Request $request, $id)
     {
-        $request->validate([
-            'current_password' => ['required', new MatchOldPassword],
-            'new_password' => ['required'],
-            'new_confirm_password' => ['same:new_password'],
-        ]);
+        $user = User::find($id);
+        if (Hash::check($request->current_password, $user->password)) {
+            $request->validate([
+                'current_password' => ['required', new MatchOldPassword],
+                'new_password' => ['required'],
+                'new_confirm_password' => ['same:new_password'],
+            ]);
 
-        User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+            User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
-        return back()->with('password_update', "Your Password Update Sucessfully!");
+            return back()->with('password_update', "Your Password Update Sucessfully!");
+        }else{
+            return back()->with('wrong_pass', "Your Current password is Wrong");
+        }
+
+
     }
 }
