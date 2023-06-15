@@ -11,7 +11,9 @@ use Illuminate\Support\Str;
 class EmployeeController extends Controller
 {
     public function employee(){
-        return view('dashboard.employee.index');
+
+        $employees = Employee::all();
+        return view('dashboard.employee.index',compact('employees'));
     }
     public function employee_insert(Request $request){
 
