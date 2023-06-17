@@ -38,5 +38,7 @@ use Illuminate\Support\Facades\Auth;
     // EmployeesController
     Route::get('/employee', [App\Http\Controllers\EmployeeController::class, 'employee'])->name('employee');
     Route::post('/employee/db/insert', [App\Http\Controllers\EmployeeController::class, 'employee_insert'])->name('employee.insert');
+    Route::post('/employee/db/update/{id}', [App\Http\Controllers\EmployeeController::class, 'employee_update'])->name('employee.update');
+    Route::post('/employee/db/delete/{id}', [App\Http\Controllers\EmployeeController::class, 'employee_delete'])->name('employee.delete');
 
 });

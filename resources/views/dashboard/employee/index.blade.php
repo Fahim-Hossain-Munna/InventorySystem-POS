@@ -229,14 +229,179 @@
                     @forelse ($employees as $employee)
                         <tr>
                             <td>{{ $loop->index +1 }}</td>
-                            <td><img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
-                                src="{{ asset('uploads/employe_photos') }}\{{ $employee->picture }}" alt="profile"></td>
+                            <td>
+                                @if ($employee->picture)
+                                <img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
+                                src="{{ asset('uploads/employe_photos') }}\{{ $employee->picture }}" alt="profile">
+                                @else
+                                <img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
+                                src="{{ asset('uploads/profile_photos') }}/defult_photo.jpg" alt="profile">
+                                @endif
+                            </td>
                             <td>{{ $employee->name }}</td>
                             <td>{{ $employee->email }}</td>
                             <td><span class="badge bg-primary">{{ $employee->position }}</span></td>
                             <td>{{ $employee->salery }}</td>
                             <td>
-                                <button class="me-1 btn btn-success btn-sm"><i class="fa fa-cogs" aria-hidden="true"></i></button>
+                                <button class="me-1 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editModal{{ $employee->id }}"><i class="fa fa-cogs" aria-hidden="true"></i></button>
+                                {{-- edit/update model start --}}
+                                <div class="modal fade" id="editModal{{ $employee->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            {{-- <div class="modal-header d-flex ">
+                                                <h5 class="modal-title p-2 w-100" id="exampleModalLabel">Insert New Employee Data</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div> --}}
+                                            <div class="modal-body">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <!-- Credit Card -->
+                                                            <div id="pay-invoice">
+                                                                <div class="card-body">
+                                                                    <div class="card-title">
+                                                                        <h3 class="text-center">Employee Edit/Update Form</h3>
+                                                                    </div>
+                                                                    <hr>
+                                                                    <form action="{{ route('employee.update',$employee->id) }}" method="POST" enctype="multipart/form-data">
+                                                                        @csrf
+
+
+                                                                        <div class="form-group">
+                                                                            <label for="cc-payment" class="control-label mb-1">Full Name</label>
+                                                                            <input id="cc-payment" name="name" type="text"
+                                                                                class="form-control" aria-required="true" aria-invalid="false"
+                                                                                value="{{ $employee->name }}">
+                                                                        </div>
+                                                                        <div class="form-group has-success">
+                                                                            <label for="cc-name" class="control-label mb-1">E-mail Address</label>
+                                                                            <input id="cc-name" name="email" type="email"
+                                                                                class="form-control cc-name valid" value="{{ $employee->email }}">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="cc-number" class="control-label mb-1">Mobile No</label>
+                                                                            <input id="cc-number" name="tel" type="tel"
+                                                                                class="form-control cc-number identified visa" value="{{ $employee->tel }}"  >
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="cc-number" class="control-label mb-1">Sex</label>
+                                                                                    <select name="sex" id="select" class="form-control">
+                                                                                        <option>Please select</option>
+                                                                                        <option value="male" {{ $employee->sex == 'male' ? 'selected':'' }}>male</option>
+                                                                                        <option value="female" {{ $employee->sex == 'female' ? 'selected':'' }}>female</option>
+                                                                                        <option value="other" {{ $employee->sex == 'other' ? 'selected':'' }}>other</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <label for="cc-number" class="control-label mb-1">Religion</label>
+                                                                                <select name="religion" id="select" class="form-control">
+                                                                                    <option>Please select</option>
+                                                                                    <option value="islam" {{ $employee->religion == 'islam' ? 'selected':'' }}>Muslim(islam)</option>
+                                                                                    <option value="hindu" {{ $employee->religion == 'hindu' ? 'selected':'' }}>Hindu</option>
+                                                                                    <option value="buddhist" {{ $employee->religion == 'buddhist' ? 'selected':'' }}>Buddhist</option>
+                                                                                    <option value="christian" {{ $employee->religion == 'christian' ? 'selected':'' }}>Christian</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="cc-number"
+                                                                                        class="control-label mb-1">Address</label>
+                                                                                    <input id="cc-number" name="address" type="text"
+                                                                                        class="form-control cc-number identified visa" value="{{ $employee->address }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <label for="cc-number" class="control-label mb-1">City</label>
+                                                                                <input id="cc-number" name="city" type="text"
+                                                                                    class="form-control cc-number identified visa" value="{{ $employee->city }}" >
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="cc-number" class="control-label mb-1">NID No</label>
+                                                                            <input id="cc-number" name="nid_no" type="tel" class="form-control" value="{{ $employee->nid_no }}">
+                                                                            {{-- <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span> --}}
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="cc-number"
+                                                                                        class="control-label mb-1">Position</label>
+                                                                                    <select name="position" id="select" class="form-control">
+                                                                                        <option>Please select</option>
+                                                                                        <option value="Human Resources" {{ $employee->position == 'Human Resources' ? 'selected':'' }}>Human Resources</option>
+                                                                                        <option value="Cashier" {{ $employee->position == 'Cashier' ? 'selected':'' }}>Cashier</option>
+                                                                                        <option value="Sales Associate" {{ $employee->position == 'Sales Associate' ? 'selected':'' }}>Sales Associate</option>
+                                                                                        <option value="Store Manager" {{ $employee->position == 'Store Manager' ? 'selected':'' }}>Store Manager</option>
+                                                                                        <option value="Advertising & Marketing Manager" {{ $employee->position == 'Advertising & Marketing Manager' ? 'selected':'' }}>Advertising &
+                                                                                            Marketing Manager</option>
+                                                                                        <option value="Inventory Manager" {{ $employee->position == 'Inventory Manager' ? 'selected':'' }}>Inventory Manager</option>
+                                                                                        <option value="Executive" {{ $employee->position == 'Executive' ? 'selected':'' }}>Executive</option>
+                                                                                        <option value="Security Guard" {{ $employee->position == 'Security Guard' ? 'selected':'' }}>Security Guard</option>
+                                                                                        <option value="Clean Worker" {{ $employee->position == 'Clean Worker' ? 'selected':'' }}>Clean Worker</option>
+                                                                                        <option value="Logistics" {{ $employee->position == 'Logistics' ? 'selected':'' }}>Logistics</option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <label for="cc-number" class="control-label mb-1">Office
+                                                                                    Type</label>
+                                                                                <select name="office_type" id="select" class="form-control">
+                                                                                    <option>Please select</option>
+                                                                                    <option value="office" {{ $employee->office_type == 'office' ? 'selected':'' }}>Office</option>
+                                                                                    <option value="online" {{ $employee->office_type == 'online' ? 'selected':'' }}>Online</option>
+                                                                                    <option value="marketing" {{ $employee->office_type == 'marketing' ? 'selected':'' }}>Marketing(field)</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <div class="form-group">
+                                                                                    <label for="cc-number" class="control-label mb-1">Starting
+                                                                                        Date</label>
+                                                                                    <input id="cc-number" name="job_start_date" type="date"
+                                                                                        class="form-control cc-number identified visa" value="{{ $employee->job_start_date }}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <label for="cc-number" class="control-label mb-1">Starting
+                                                                                    Salery</label>
+                                                                                <input id="cc-number" name="salery" type="text"
+                                                                                    class="form-control cc-number identified visa" value="{{ $employee->salery }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label style="display: block" class="mb-2">Current Photo</label>
+                                                                            @if ($employee->picture)
+                                                                                <img style="height: 150px" src="{{ asset('uploads/employe_photos') }}/{{ $employee->picture  }}" alt="employe_photos">
+                                                                            @else
+                                                                                <img style="height: 150px; width: 150px" src="{{ asset('uploads/profile_photos') }}/defult_photo.jpg" alt="profile_photos">
+                                                                            @endif
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="cc-payment" class="control-label mb-1">Employee Picture</label>
+                                                                            <br>
+                                                                            <input type="file" id="cc-payment" name="picture" class="form-control-file">
+                                                                        </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div> <!-- .card -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success">Save changes</button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 <button class="me-1 btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal{{ $employee->id }}"><i class="fa fa-eye" aria-hidden="true"></i></button>
                                 {{-- view modal part start --}}
                                 <div class="modal fade" id="viewModal{{ $employee->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -244,28 +409,40 @@
                                       <div class="modal-content">
                                         <div class="modal-body">
                                           <div class="card">
+                                            <style>
+                                                  .card-body .title_first{
+                                                    font-size: 22px;
+                                                    font-weight: 800;
+                                                    color: #FF0060;
+                                                  }
+                                                  .card-body #span{
+                                                    font-size: 18px;
+                                                    font-weight: 400;
+                                                    color: #116A7B;
+                                                  }
+                                            </style>
                                             <div class="card-body">
                                                 <div class="card-title">
                                                     <h3 class="text-center">Employee Details</h3>
                                                 </div>
                                                 <hr>
                                                 <div class="d-flex justify-content-center mt-3 mb-5">
-                                                    <img style="width: 120px; height:120px;" class="user-avatar rounded-circle"
+                                                    <img style="width: 200px; height:200px;" class="user-avatar"
                                                     src="{{ asset('uploads/employe_photos') }}\{{ $employee->picture }}" alt="profile">
                                                 </div>
                                                 <hr>
-                                                <p class="fw-bold">Name : <span class="text-info">{{ $employee->name }}</span></p>
-                                                <p class="fw-bold">E-mail : <span class="text-info">{{ $employee->email }}</span></p>
-                                                <p class="fw-bold">Contact No : <span class="text-info">{{ $employee->tel }}</span></p>
-                                                <p class="fw-bold">Home Address : <span class="text-info">{{ $employee->address }}</span></p>
-                                                <p class="fw-bold">City : <span class="text-info">{{ $employee->city }}</span></p>
-                                                <p class="fw-bold">Sex : <span class="text-info">{{ $employee->sex }}</span></p>
-                                                <p class="fw-bold">Religion : <span class="text-info">{{ $employee->religion }}</span></p>
-                                                <p class="fw-bold">NID No : <span class="text-info">{{ $employee->nid_no }}</span></p>
-                                                <p class="fw-bold">Position : <span class="text-info">{{ $employee->position }}</span></p>
-                                                <p class="fw-bold">Work Type : <span class="text-info">{{ $employee->office_type }}</span></p>
-                                                <p class="fw-bold">Join Date : <span class="text-info">{{ $employee->job_start_date }}</span></p>
-                                                <p class="fw-bold">Salery : <span class="text-info">{{ $employee->salery }}</span></p>
+                                                <p class="title_first">Name : <span id="span">{{ $employee->name }}</span></p>
+                                                <p class="title_first">E-mail : <span id="span">{{ $employee->email }}</span></p>
+                                                <p class="title_first">Contact No : <span id="span">{{ $employee->tel }}</span></p>
+                                                <p class="title_first">Home Address : <span id="span">{{ $employee->address }}</span></p>
+                                                <p class="title_first">City : <span id="span">{{ $employee->city }}</span></p>
+                                                <p class="title_first">Sex : <span id="span">{{ $employee->sex }}</span></p>
+                                                <p class="title_first">Religion : <span id="span">{{ $employee->religion }}</span></p>
+                                                <p class="title_first">NID No : <span id="span">{{ $employee->nid_no }}</span></p>
+                                                <p class="title_first">Position : <span id="span">{{ $employee->position }}</span></p>
+                                                <p class="title_first">Work Type : <span id="span">{{ $employee->office_type }}</span></p>
+                                                <p class="title_first">Join Date : <span id="span">{{ $employee->job_start_date }}</span></p>
+                                                <p class="title_first">Salery : <span id="span">{{ $employee->salery }}</span></p>
 
                                             </div>
                                           </div>
@@ -276,8 +453,43 @@
                                       </div>
                                     </div>
                                   </div>
-                                <button class="me-1 btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></button>
-
+                                <button class="me-1 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $employee->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                {{-- delete modal part start --}}
+                                <div class="modal fade" id="deleteModal{{ $employee->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header d-flex justify-content-end">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <style>
+                                            .modal-body i{
+                                                position: absolute;
+                                                top: 50px;
+                                                left: 50%;
+                                                font-size: 60px;
+                                                transform: translateX(-50%);
+                                                color: #FF0060;
+                                            }
+                                            .modal-body #changeStatusp{
+                                                margin-top: 120px;
+                                                font-size: 30px;
+                                                font-weight: 800;
+                                                color: #116A7B;
+                                            }
+                                        </style>
+                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                        <p class="text-center" id="changeStatusp">Are you confirm to delete.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ route('employee.delete',$employee->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             </td>
 
                         </tr>
@@ -293,12 +505,13 @@
                 </tbody>
                 <tfoot>
                     <tr>
+                        <th>SL No</th>
+                        <th>Image</th>
                         <th>Name</th>
+                        <th>Email</th>
                         <th>Position</th>
-                        <th>Office</th>
-                        <th>Age</th>
-                        <th>Start date</th>
                         <th>Salary</th>
+                        <th>Action</th>
                     </tr>
                 </tfoot>
             </table>
@@ -318,4 +531,76 @@
     });
 
 </script>
+
+
+@if (session('employee_add'))
+
+<script>
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: "{{ session('employee_add') }}"
+})
+</script>
+
+@endif
+
+@if (session('employee_delete'))
+
+<script>
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: "{{ session('employee_delete') }}",
+})
+</script>
+
+@endif
+
+
+@if (session('employee_update'))
+
+<script>
+    const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+Toast.fire({
+  icon: 'success',
+  title: "{{ session('employee_update') }}",
+})
+</script>
+
+@endif
+
 @endsection
