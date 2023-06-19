@@ -230,12 +230,12 @@
                         <tr>
                             <td>{{ $loop->index +1 }}</td>
                             <td>
-                                @if ($employee->picture)
-                                <img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
-                                src="{{ asset('uploads/employe_photos') }}\{{ $employee->picture }}" alt="profile">
+                                @if ($employee->picture == 'defult_photo.jpg')
+                                    <img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
+                                    src="{{ asset('uploads/profile_photos') }}/defult_photo.jpg" alt="profile">
                                 @else
-                                <img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
-                                src="{{ asset('uploads/profile_photos') }}/defult_photo.jpg" alt="profile">
+                                    <img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
+                                    src="{{ asset('uploads/employe_photos') }}\{{ $employee->picture }}" alt="profile">
                                 @endif
                             </td>
                             <td>{{ $employee->name }}</td>
@@ -376,10 +376,10 @@
                                                                         </div>
                                                                         <div class="form-group">
                                                                             <label style="display: block" class="mb-2">Current Photo</label>
-                                                                            @if ($employee->picture)
-                                                                                <img style="height: 150px" src="{{ asset('uploads/employe_photos') }}/{{ $employee->picture  }}" alt="employe_photos">
-                                                                            @else
+                                                                            @if ($employee->picture == 'defult_photo.jpg')
                                                                                 <img style="height: 150px; width: 150px" src="{{ asset('uploads/profile_photos') }}/defult_photo.jpg" alt="profile_photos">
+                                                                            @else
+                                                                                <img style="height: 150px" src="{{ asset('uploads/employe_photos') }}/{{ $employee->picture  }}" alt="employe_photos">
                                                                             @endif
                                                                         </div>
                                                                         <div class="form-group">
@@ -496,9 +496,9 @@
 
                     @empty
 
-                    <tr>
-                        <td colspan="6" class="text-center text-danger"> No Data Found</td>
-                    </tr>
+                        <tr>
+                            <td colspan="7" class="text-center text-danger"> No Data Found</td>
+                        </tr>
 
                     @endforelse
 
@@ -526,7 +526,7 @@
 
 @section('footer_script')
 <script>
-    jQuery(document).ready(function ($) {
+    $(document).ready(function () {
         $('#myTable').DataTable();
     });
 

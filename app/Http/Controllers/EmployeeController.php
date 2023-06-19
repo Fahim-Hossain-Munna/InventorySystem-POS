@@ -17,7 +17,6 @@ class EmployeeController extends Controller
         return view('dashboard.employee.index',compact('employees'));
     }
     public function employee_insert(Request $request){
-
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -73,9 +72,6 @@ class EmployeeController extends Controller
                 'created_at' => now(),
             ]);
         }
-
-
-
         return redirect()->route('employee')->with('employee_add' , 'new employee details added');
     }
 

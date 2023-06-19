@@ -113,7 +113,6 @@
                             }
 
                             form i {
-                                /* margin-left: -30px; */
                                 cursor: pointer;
                                 position: absolute;
                                 top: 47%;

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('sex');
             $table->string('religion');
-            $table->integer('nid_no');
+            $table->longText('nid_no');
             $table->string('position');
             $table->string('office_type');
             $table->string('job_start_date');
