@@ -427,8 +427,12 @@
                                                 </div>
                                                 <hr>
                                                 <div class="d-flex justify-content-center mt-3 mb-5">
+                                                    @if ($employee->picture == 'defult_photo.jpg')
+                                                    <img style="height: 150px; width: 150px" src="{{ asset('uploads/profile_photos') }}/defult_photo.jpg" alt="profile_photos">
+                                                    @else
                                                     <img style="width: 200px; height:200px;" class="user-avatar"
                                                     src="{{ asset('uploads/employe_photos') }}\{{ $employee->picture }}" alt="profile">
+                                                    @endif
                                                 </div>
                                                 <hr>
                                                 <p class="title_first">Name : <span id="span">{{ $employee->name }}</span></p>
@@ -526,7 +530,7 @@
 
 @section('footer_script')
 <script>
-    $(document).ready(function () {
+    jQuery(document).ready(function ($) {
         $('#myTable').DataTable();
     });
 
