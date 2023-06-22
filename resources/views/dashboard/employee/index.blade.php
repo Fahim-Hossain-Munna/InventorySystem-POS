@@ -55,8 +55,6 @@
                                         <hr>
                                         <form action="{{ route('employee.insert') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
-
-
                                             <div class="form-group">
                                                 <label for="cc-payment" class="control-label mb-1">Full Name</label>
                                                 <input id="cc-payment" name="name" type="text"
@@ -495,15 +493,11 @@
                                     </div>
                                 </div>
                             </td>
-
                         </tr>
-
                     @empty
-
                         <tr>
                             <td colspan="7" class="text-center text-danger"> No Data Found</td>
                         </tr>
-
                     @endforelse
 
                 </tbody>

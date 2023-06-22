@@ -45,4 +45,10 @@ use Illuminate\Support\Facades\Auth;
     Route::get('/expense', [App\Http\Controllers\ExpenseController::class, 'expense'])->name('expense.view');
     Route::post('/expense/db/insert', [App\Http\Controllers\ExpenseController::class, 'expense_insert'])->name('expense.insert');
 
+    // ExpenseController
+    Route::get('/variation', [App\Http\Controllers\VariationController::class, 'variation'])->name('variation.view');
+
+    // CategoryController
+    Route::post('/category/insert', [App\Http\Controllers\CategoryController::class, 'category_insert'])->name('category.insert');
+    Route::get('/category/details/{id}', [App\Http\Controllers\CategoryController::class, 'category_details'])->name('category.details');
 });
