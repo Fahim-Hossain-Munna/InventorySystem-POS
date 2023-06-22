@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\File;
 
 
 class ProfileSettingsController extends Controller
@@ -27,6 +28,14 @@ class ProfileSettingsController extends Controller
          ]);
 
          if($request->hasFile('image')){
+
+            $old_image = User::find($id)->picture;
+            $file_destination = base_path('public/uploads/profile_photos/'.$old_image);
+
+                if(File::exists($file_destination)){
+                    unlink(public_path('uploads/profile_photos/'.$old_image));
+                }
+
             $new_img = auth()->user()->name."_".auth()->user()->id."_".str::random(5).now()->format("h_m_d").".".$request->file('image')->getClientOriginalExtension();
             $img = Image::make($request->file('image'));
             $img->resize(360, 360, function ($constraint) {
