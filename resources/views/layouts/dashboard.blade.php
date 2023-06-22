@@ -123,15 +123,12 @@
                             <li><i class="fa fa-file-word-o"></i><a href="ui-typgraphy.html">Typography</a></li>
                         </ul> --}}
                     </li>
+                    <li class="menu-title">Accounts</li><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Tables</a>
-                        <ul class="sub-menu children dropdown-menu">
-                            <li><i class="fa fa-table"></i><a href="tables-basic.html">Basic Table</a></li>
-                            <li><i class="fa fa-table"></i><a href="tables-data.html">Data Table</a></li>
-                        </ul>
+                        <a href="{{ route('expense.view') }}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-money"></i>Regular Expense</a>
                     </li>
-                    <li class="menu-item-has-children dropdown">
+                    {{-- <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-th"></i>Forms</a>
                         <ul class="sub-menu children dropdown-menu">
@@ -139,9 +136,6 @@
                             <li><i class="menu-icon fa fa-th"></i><a href="forms-advanced.html">Advanced Form</a></li>
                         </ul>
                     </li>
-
-                    <li class="menu-title">Icons</li><!-- /.menu-title -->
-
                     <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>Icons</a>
@@ -175,7 +169,7 @@
                             <li><i class="menu-icon fa fa-street-view"></i><a href="maps-vector.html">Vector Maps</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="menu-title">Extras</li>
                     <!-- /.menu-title -->
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">
