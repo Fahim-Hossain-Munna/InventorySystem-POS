@@ -38,10 +38,10 @@
                                 <input id="" name="category_image" type="file" class="form-control mb-2" value="">
                             </div>
                             <div>
-                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>
+                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#addCategory">Add Category</button>
                             </div>
                             <!-- Modal start -->
-                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header d-flex justify-content-end">
@@ -49,23 +49,23 @@
                                     </div>
                                     <div class="modal-body">
                                     <style>
-                                        .modal-body i{
-                                            position: none !important;
+                                        .modal-body #categoryI{
+                                            position: absolute !important;
                                             top: 50px;
                                             left: 50%;
                                             font-size: 60px;
                                             transform: translateX(-50%);
                                             color: #FF0060;
                                         }
-                                        .modal-body p{
+                                        .modal-body #categoryP{
                                             margin-top: 120px;
                                             font-size: 30px;
                                             font-weight: 800;
                                             color: #116A7B;
                                         }
                                     </style>
-                                    <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                                    <p class="text-center">Are you sure to create category?</p>
+                                    <i class="fa fa-question-circle-o" id="categoryI" aria-hidden="true"></i>
+                                    <p class="text-center" id="categoryP">Are you sure to create category?</p>
                                     </div>
                                     <div class="modal-footer">
                                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -136,10 +136,10 @@
                                     <input id="" name="category_image" type="file" class="form-control mb-2" value="">
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>
+                                    <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#addbrand">Add Brand</button>
                                 </div>
                                 <!-- Modal start -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="addbrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header d-flex justify-content-end">
@@ -147,23 +147,23 @@
                                         </div>
                                         <div class="modal-body">
                                         <style>
-                                            .modal-body i{
-                                                position: none !important;
+                                            .modal-body #brandI{
+                                                position: absolute !important;
                                                 top: 50px;
                                                 left: 50%;
                                                 font-size: 60px;
                                                 transform: translateX(-50%);
                                                 color: #FF0060;
                                             }
-                                            .modal-body p{
+                                            .modal-body #brandP{
                                                 margin-top: 120px;
                                                 font-size: 30px;
                                                 font-weight: 800;
                                                 color: #116A7B;
                                             }
                                         </style>
-                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
-                                        <p class="text-center">Are you sure to create category?</p>
+                                        <i class="fa fa-question-circle-o" id="brandI" aria-hidden="true"></i>
+                                        <p class="text-center" id="brandP">Are you sure to create Brand?</p>
                                         </div>
                                         <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
