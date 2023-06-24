@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 class ExpenseController extends Controller
 {
     public function expense(){
-
+        $total_expenses = Expense::all()->sum('expense_amount');
         $expenses = Expense::all();
-        return view('dashboard.expense.index',compact('expenses'));
+        return view('dashboard.expense.index',compact('expenses','total_expenses'));
     }
     public function expense_insert(Request $request){
 

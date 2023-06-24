@@ -26,7 +26,15 @@
         </div>
     </div>
 </div>
-
+<div class="col-12 d-flex justify-content-center">
+    <div class="text-danger mt-5">
+        @if ($total_expenses)
+            <h1 class="fw-bold">Total Expense Today = ৳ {{ $total_expenses }}tk</h1>
+        @else
+            <h1 class="fw-bold">Total Expense Today = ৳ 0tk</h1>
+        @endif
+    </div>
+</div>
 <div class="content">
     <div class="mb-3 d-flex justify-content-end">
         <button type="button" class="btn btn-primary btn-sm fw-bolder" data-bs-toggle="modal"
@@ -119,6 +127,7 @@
                             <th>Expense Amount</th>
                             <th>Expense Submit Time</th>
                             <th>Expense Submit Date</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -130,10 +139,13 @@
                              <td>{{ $expense->expense_amount }}</td>
                              <td>{{ $expense->time }}</td>
                              <td>{{ $expense->date }}</td>
+                             <td>joy bangla</td>
 
                          </tr>
                        @empty
-
+                         <tr>
+                            <td colspan="7" class="text-center text-danger">No Data Found</td>
+                         </tr>
                        @endforelse
                     </tbody>
                     <tfoot>
@@ -144,6 +156,7 @@
                             <th>Expense Amount</th>
                             <th>Expense Submit Time</th>
                             <th>Expense Submit Date</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>
