@@ -51,4 +51,9 @@ use Illuminate\Support\Facades\Auth;
     // CategoryController
     Route::post('/category/insert', [App\Http\Controllers\CategoryController::class, 'category_insert'])->name('category.insert');
     Route::get('/category/details/{id}', [App\Http\Controllers\CategoryController::class, 'category_details'])->name('category.details');
+
+    // SupplierController
+    Route::resource('supplier', App\Http\Controllers\SupplierController::class);
+
+
 });
