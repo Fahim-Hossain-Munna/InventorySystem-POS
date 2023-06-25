@@ -8,7 +8,7 @@
             <div class="card">
               <div class="card-body">
                   <div class="card-title">
-                      <h3 class="text-center">Employee Details</h3>
+                      <h3 class="text-center">Category Details</h3>
                   </div>
                   <hr>
                     <div class="d-flex justify-content-center mt-3 mb-5">
@@ -18,7 +18,6 @@
                     <hr>
                     <p class="title_first">Name : <span id="span">{{ $categories->category_name }}</span></p>
                     <p class="title_first">Slug : <span id="span">{{ $categories->category_slug }}</span></p>
-                    <p class="title_first">Image : <span id="span">{{ $categories->caetegory_image }}</span></p>
 
               </div>
             </div>

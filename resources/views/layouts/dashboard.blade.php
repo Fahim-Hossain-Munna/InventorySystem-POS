@@ -98,6 +98,10 @@
                     </li>
                     <li class="menu-title">USER INFO</li>
                     <!-- /.menu-title -->
+                    <li class="{{ Request::is('supplier') ? 'active' : '' }}">
+                        <a href="{{ route('supplier.index') }}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"> <i class="menu-icon fa fa-money"></i>Supplier</a>
+                    </li>
                     <li class="{{ Request::is('profile') ? 'active' : '' }}">
                         <a href="{{ route('profile') }}"> <i class="menu-icon fa fa-user-circle"></i>Profile</a>
                         {{-- <ul class="sub-menu children dropdown-menu">

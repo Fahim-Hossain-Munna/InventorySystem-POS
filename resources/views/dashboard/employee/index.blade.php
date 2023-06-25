@@ -401,6 +401,7 @@
                                     </div>
                                 </div>
                                 <button class="me-1 btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal{{ $employee->id }}"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                
                                 {{-- view modal part start --}}
                                 <div class="modal fade" id="viewModal{{ $employee->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">

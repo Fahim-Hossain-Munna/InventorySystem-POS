@@ -306,7 +306,6 @@
     </div>
 </div>
 
-
 @endsection
 
 @section('footer_script')
@@ -318,7 +317,6 @@
 </script>
 
 @if (session('expense_insert'))
-
 <script>
     const Toast = Swal.mixin({
   toast: true,

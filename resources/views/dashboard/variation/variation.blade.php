@@ -1,145 +1,248 @@
 @extends('layouts.dashboard')
+
 @section('content')
+
 <div class="breadcrumbs">
     <div class="breadcrumbs-inner">
         <div class="row m-0">
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Variations</h1>
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            {{-- <li><a href="{{ route('home') }}">Dashboard</a></li>
+                            <li><a href="{{ route('expense.view') }}">Expenses</a></li>
+                            <li class="{{ route('expense.view') }}">All Expenses</li> --}}
+                        </ol>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="col-lg-6">
-        <div class="card mt-4">
-            <div class="card-body">
-                <!-- Credit Card -->
-                <div id="pay-invoice">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <h3 class="text-center">Category</h3>
-                        </div>
-                        <form action="{{ route('category.insert') }}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <label for="" class="control-label mb-2">Category Name</label>
-                                <input id="" name="category_name" type="text" class="form-control mb-2" placeholder="Category Name">
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="control-label mb-2">Category Slug</label>
-                                <input id="" name="category_slug" type="text" class="form-control mb-2" placeholder="Category Slug">
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="control-label mb-2 mt-3">Image</label>
-                                <input id="" name="category_image" type="file" class="form-control mb-2" value="">
-                            </div>
-                            <div>
-                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#addCategory">Add Category</button>
-                            </div>
-                            <!-- Modal start -->
-                            <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header d-flex justify-content-end">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                    <style>
-                                        .modal-body #categoryI{
-                                            position: absolute !important;
-                                            top: 50px;
-                                            left: 50%;
-                                            font-size: 60px;
-                                            transform: translateX(-50%);
-                                            color: #FF0060;
-                                        }
-                                        .modal-body #categoryP{
-                                            margin-top: 120px;
-                                            font-size: 30px;
-                                            font-weight: 800;
-                                            color: #116A7B;
-                                        }
-                                    </style>
-                                    <i class="fa fa-question-circle-o" id="categoryI" aria-hidden="true"></i>
-                                    <p class="text-center" id="categoryP">Are you sure to create category?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-success">Yess!</button>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <!-- Modal end -->
-                        </form>
-                        <div class="card-title">
-                            <h3 class="text-center">Category List</h3>
-                        </div>
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th scope="col">SL</th>
-                                <th scope="col">Category name</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                            </thead>
-                            @forelse ($categories as $category)
-                                <tbody>
-                                    <tr>
-                                        <th scope="row">{{ $loop->index +1 }}</th>
-                                        <td>{{ $category->category_name }}</td>
-                                        <td>
-                                            <a href="{{ route('category.details', $category->id) }}" class="btn btn-info">Details</a>
-                                        </td>
-                                        {{-- <td>
-                                            <img height="100px" width="100px" src="{{ asset('uploads/category_photos') }}\{{ $category->category_image }}" alt="">
-                                        </td> --}}
-                                    </tr>
-                                </tbody>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="text-center text-danger"> No Data Found</td>
-                                </tr>
-                            @endforelse
-                        </table>
-                    </div>
-                </div>
 
-            </div>
-        </div>
-    </div>
-        <div class="col-lg-6">
-            <div class="card mt-4">
-                <div class="card-body">
-                    <!-- Credit Card -->
-                    <div id="pay-invoice">
-                        <div class="card-body">
-                            <div class="card-title">
-                                <h3 class="text-center">Brands</h3>
+<div class="row">
+    <!-- new category create modal start -->
+        <div class="modal fade" id="newCategory" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('category.insert') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-title pt-5">
+                                <h3 class="text-center">Category Form</h3>
                             </div>
-                            <form action="{{ route('category.insert') }}" method="post" enctype="multipart/form-data">
-                                @csrf
+                            <div class="card-body pb-5">
                                 <div class="form-group">
                                     <label for="" class="control-label mb-2">Category Name</label>
-                                    <input id="" name="brand_name" type="text" class="form-control mb-2" placeholder="Category Name">
+                                    <input id="" name="category_name" type="text" class="form-control mb-2" placeholder="Category Name">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="control-label mb-2">Category Slug</label>
-                                    <input id="" name="brand_name" type="text" class="form-control mb-2" placeholder="Category Slug">
+                                    <input id="" name="category_slug" type="text" class="form-control mb-2" placeholder="Category Slug">
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="control-label mb-2 mt-3">Image</label>
                                     <input id="" name="category_image" type="file" class="form-control mb-2" value="">
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#addbrand">Add Brand</button>
+                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>
                                 </div>
-                                <!-- Modal start -->
-                                <div class="modal fade" id="addbrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+<!-- new category create modal end-->
+    <!-- new brand create modal start -->
+        <div class="modal fade" id="newBrand" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('brand.insert') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                <div class="modal-body">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-title pt-5">
+                                <h3 class="text-center">Brand Form</h3>
+                            </div>
+                            <div class="card-body pb-5">
+                                <div class="form-group">
+                                    <label for="" class="control-label mb-2">Brand Name</label>
+                                    <input id="" name="brand_name" type="text" class="form-control mb-2" placeholder="Brand Name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label mb-2">Brand Slug</label>
+                                    <input id="" name="brand_slug" type="text" class="form-control mb-2" placeholder="Brand Slug">
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label mb-2 mt-3">Image</label>
+                                    <input id="" name="brand_image" type="file" class="form-control mb-2" value="">
+                                </div>
+                                <div>
+                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Brand</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
+            </div>
+            </div>
+        </div>
+<!-- new brand create modal end-->
+
+            <div class="col-md-12 bg-white p-5 col-lg-6">
+                <div class="mb-3 d-flex justify-content-end mb-5">
+                    <button type="button" class="btn btn-primary btn-sm fw-bolder" data-bs-toggle="modal"
+                        data-bs-target="#newCategory"><i class="fa fa-plus me-1" aria-hidden="true"></i>New Category</button>
+                </div>
+                <table id="catTable" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">SL</th>
+                            <th scope="col">Category name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($categories as $category)
+                        <tr>
+                            <td>{{ $loop->index +1 }}</td>
+                            <td>{{ $category->category_name }}</td>
+                            <td>
+                                <button class="me-1 btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewModalCategory{{  $category->id  }}"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                {{-- View Modal start --}}
+                                <div class="modal fade" id="viewModalCategory{{ $category->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-body">
+                                          <div class="card">
+                                            <style>
+                                                  .card-body .title_first{
+                                                    font-size: 22px;
+                                                    font-weight: 800;
+                                                    color: #FF0060;
+                                                  }
+                                                  .card-body #span{
+                                                    font-size: 18px;
+                                                    font-weight: 400;
+                                                    color: #116A7B;
+                                                  }
+                                            </style>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h3 class="text-center">Category Details</h3>
+                                                </div>
+                                                <hr>
+                                                <div class="d-flex justify-content-center mt-3 mb-5">
+                                                    <img style="height:300px;" class="user-avatar"
+                                                    src="{{ asset('uploads/category_photos') }}\{{ $category->category_image }}" alt="Loading">
+                                                </div>
+                                                <hr>
+                                                <p class="title_first">category Name : <span id="span">{{ $category->category_name }}</span></p>
+                                                <p class="title_first">Category Slug : <span id="span">{{ $category->category_slug }}</span></p>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                {{-- View Modal end --}}
+
+                                {{-- edit/update model start --}}
+                                <button class="me-1 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editCategoryModal{{ $category->id }}"><i class="fa fa-cogs" aria-hidden="true"></i></button>
+                                <div class="modal fade" id="editCategoryModal{{ $category->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            {{-- <div class="modal-header d-flex ">
+                                                <h5 class="modal-title p-2 w-100" id="exampleModalLabel">Insert New Employee Data</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div> --}}
+                                            <div class="modal-body">
+                                                <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                <!-- Credit Card -->
+                                                <div id="pay-invoice">
+                                                    <div class="card-body">
+                                                        <div class="card-title">
+                                                            <h3 class="text-center">Employee Edit/Update Form</h3>
+                                                        </div>
+                                                        <hr>
+                                                        <form action="{{ route('category.update',$category->id) }}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="cc-payment" class="control-label mb-1">Category Name</label>
+                                                                <input id="cc-payment" name="category_name" type="text"
+                                                                    class="form-control" aria-required="true" aria-invalid="false"
+                                                                    value="{{ $category->category_name }}">
+                                                            </div>
+                                                            <div class="form-group has-success">
+                                                                <label for="cc-name" class="control-label mb-1">Category Slug</label>
+                                                                <input id="cc-name" name="category_slug" type="text"
+                                                                    class="form-control cc-name valid" value="{{ $category->category_slug }}">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label style="display: block" class="mb-2">Current Photo</label>
+                                                                <img style="height: 150px" src="{{ asset('uploads/category_photos') }}/{{ $category->category_image }}" alt="category_photos">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="cc-payment" class="control-label mb-1">Category Image</label>
+                                                                <br>
+                                                                <input type="file" id="cc-payment" name="category_image" class="form-control-file">
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+                                                    </div>
+                                                </div> <!-- .card -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success">Save changes</button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Edit Modal end --}}
+                                {{-- Delete Modal start --}}
+                                <button class="me-1 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal{{ $category->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <div class="modal fade" id="deleteCategoryModal{{ $category->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header d-flex justify-content-end">
@@ -147,42 +250,234 @@
                                         </div>
                                         <div class="modal-body">
                                         <style>
-                                            .modal-body #brandI{
-                                                position: absolute !important;
+                                            .modal-body i{
+                                                position: absolute;
                                                 top: 50px;
                                                 left: 50%;
                                                 font-size: 60px;
                                                 transform: translateX(-50%);
                                                 color: #FF0060;
                                             }
-                                            .modal-body #brandP{
+                                            .modal-body #changeStatusp{
                                                 margin-top: 120px;
                                                 font-size: 30px;
                                                 font-weight: 800;
                                                 color: #116A7B;
                                             }
                                         </style>
-                                        <i class="fa fa-question-circle-o" id="brandI" aria-hidden="true"></i>
-                                        <p class="text-center" id="brandP">Are you sure to create Brand?</p>
+                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                        <p class="text-center" id="changeStatusp">Are you confirm to delete.</p>
                                         </div>
                                         <div class="modal-footer">
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-success">Yess!</button>
+                                            <form action="{{ route('category.delete',$category->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">delete</button>
+                                            </form>
                                         </div>
                                     </div>
                                     </div>
                                 </div>
-                                <!-- Modal end -->
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                </div>
+                                {{-- Delete Modal end --}}
+                           </td>
+
+                        </tr>
+                      @empty
+                           <tr>
+                               <td colspan="7" class="text-center text-danger"> No Data Found</td>
+                           </tr>
+                      @endforelse
+                    </tbody>
+                </table>
+                {{-- table end --}}
             </div>
-        </div>
+
+            <div class="col-md-12 bg-white p-5 col-lg-6">
+                <div class="mb-3 d-flex justify-content-end mb-5">
+                    <button type="button" class="btn btn-primary btn-sm fw-bolder" data-bs-toggle="modal"
+                        data-bs-target="#newBrand"><i class="fa fa-plus me-1" aria-hidden="true"></i>New Brand</button>
+                </div>
+                <table id="brandTable" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">SL</th>
+                            <th scope="col">Brand name</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($brands as $brand)
+                        <tr>
+                            <td>{{ $loop->index +1 }}</td>
+                            <td>{{ $brand->brand_name }}</td>
+                            <td>
+                                <button class="me-1 btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#viewModalBrand{{ $brand->id }}"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                {{-- View Modal start --}}
+                                <div class="modal fade" id="viewModalBrand{{ $brand->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                      <div class="modal-content">
+                                        <div class="modal-body">
+                                          <div class="card">
+                                            <style>
+                                                  .card-body .title_first{
+                                                    font-size: 22px;
+                                                    font-weight: 800;
+                                                    color: #FF0060;
+                                                  }
+                                                  .card-body #span{
+                                                    font-size: 18px;
+                                                    font-weight: 400;
+                                                    color: #116A7B;
+                                                  }
+                                            </style>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h3 class="text-center">brand Details</h3>
+                                                </div>
+                                                <hr>
+                                                <div class="d-flex justify-content-center mt-3 mb-5">
+                                                    <img style="height:300px;" class="user-avatar"
+                                                    src="{{ asset('uploads/brand_photos') }}\{{ $brand->brand_image }}" alt="Loading">
+                                                </div>
+                                                <hr>
+                                                <p class="title_first">brand Name : <span id="span">{{ $brand->brand_name }}</span></p>
+                                                <p class="title_first">brand Slug : <span id="span">{{ $brand->brand_slug }}</span></p>
+
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                {{-- View Modal end --}}
+                                {{-- edit/update model start --}}
+                                <button class="me-1 btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#editBrandModal{{ $brand->id }}"><i class="fa fa-cogs" aria-hidden="true"></i></button>
+                                <div class="modal fade" id="editBrandModal{{ $brand->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            {{-- <div class="modal-header d-flex ">
+                                                <h5 class="modal-title p-2 w-100" id="exampleModalLabel">Insert New Employee Data</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div> --}}
+                                            <div class="modal-body">
+                                                <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                <!-- Credit Card -->
+                                                <div id="pay-invoice">
+                                                    <div class="card-body">
+                                                        <div class="card-title">
+                                                            <h3 class="text-center">Employee Edit/Update Form</h3>
+                                                        </div>
+                                                        <hr>
+                                                        <form action="{{ route('brand.update',$brand->id) }}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <label for="cc-payment" class="control-label mb-1">Category Name</label>
+                                                                <input id="cc-payment" name="brand_name" type="text"
+                                                                    class="form-control" aria-required="true" aria-invalid="false"
+                                                                    value="{{ $brand->brand_name }}">
+                                                            </div>
+                                                            <div class="form-group has-success">
+                                                                <label for="cc-name" class="control-label mb-1">Category Slug</label>
+                                                                <input id="cc-name" name="brand_slug" type="text"
+                                                                    class="form-control cc-name valid" value="{{ $brand->brand_slug }}">
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label style="display: block" class="mb-2">Current Photo</label>
+                                                                <img style="height: 150px" src="{{ asset('uploads/brand_photos') }}/{{ $brand->brand_image }}" alt="brand_photos">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="cc-payment" class="control-label mb-1">Category Image</label>
+                                                                <br>
+                                                                <input type="file" id="cc-payment" name="brand_image" class="form-control-file">
+                                                            </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+
+                                                    </div>
+                                                </div> <!-- .card -->
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-success">Save changes</button>
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{-- Edit Modal end --}}
+                                {{-- Delete Modal start --}}
+                                <button class="me-1 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteBrandModal{{ $brand->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                <div class="modal fade" id="deleteBrandModal{{ $brand->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header d-flex justify-content-end">
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                        <style>
+                                            .modal-body i{
+                                                position: absolute;
+                                                top: 50px;
+                                                left: 50%;
+                                                font-size: 60px;
+                                                transform: translateX(-50%);
+                                                color: #FF0060;
+                                            }
+                                            .modal-body #changeStatusp{
+                                                margin-top: 120px;
+                                                font-size: 30px;
+                                                font-weight: 800;
+                                                color: #116A7B;
+                                            }
+                                        </style>
+                                        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                                        <p class="text-center" id="changeStatusp">Are you confirm to delete.</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ route('brand.delete',$brand->id) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="btn btn-danger">delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                {{-- Delete Modal end --}}
+                           </td>
+
+                        </tr>
+                      @empty
+                           <tr>
+                               <td colspan="7" class="text-center text-danger"> No Data Found</td>
+                           </tr>
+                      @endforelse
+                    </tbody>
+                </table>
+                {{-- table end --}}
+            </div>
+    </div>
+</div>
+
 @endsection
 
 @section('footer_script')
+<script>
+    jQuery(document).ready(function ($) {
+        $('#catTable').DataTable();
+    });
+
+    jQuery(document).ready(function ($) {
+        $('#brandTable').DataTable();
+    });
+
+</script>
+
 @if (session('category_insert'))
     <script>
         const Toast = Swal.mixin({
@@ -204,7 +499,7 @@
     </script>
 @endif
 
-@if (session('password_update'))
+@if (session('brand_insert'))
     <script>
         const Toast = Swal.mixin({
             toast: true,
@@ -220,25 +515,51 @@
 
             Toast.fire({
             icon: 'success',
-            title: '{{ session('password_update') }}'
+            title: '{{ session('brand_insert') }}'
             })
     </script>
 @endif
 
+@if (session('category_update'))
+    <script>
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
 
-<script>
-    const togglePassword = document.querySelector("#togglePassword");
-    const password = document.querySelector("#password");
+        Toast.fire({
+        icon: 'success',
+        title: "{{ session('category_update') }}",
+        })
+    </script>
+@endif
+@if (session('brand_update'))
+    <script>
+        const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+        })
 
-        togglePassword.addEventListener("click", function () {
-            // toggle the type attribute
-            const type = password.getAttribute("type") === "password" ? "text" : "password";
-            password.setAttribute("type", type);
-
-            // toggle the icon
-            this.classList.toggle("bi-eye");
-        });
-</script>
+        Toast.fire({
+        icon: 'success',
+        title: "{{ session('brand_update') }}",
+        })
+    </script>
+@endif
 
 @endsection
 
