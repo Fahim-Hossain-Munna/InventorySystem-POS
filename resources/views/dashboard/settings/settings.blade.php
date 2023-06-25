@@ -119,7 +119,7 @@
                                 left: 92%;
                             }
                         </style>
-                        <form action="{{ route('password.update', auth()->user()->id) }}" method="post">
+                        <form action="{{ route('password.edit', auth()->user()->id) }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="" class="control-label mb-2">Current Paaaword</label>

@@ -101,7 +101,7 @@ class EmployeeController extends Controller
 
                 Employee::findOrFail($id)->update([
                     'picture' => $new_img,
-                    'created_at' => now(),
+                    'updated_at' => now(),
                 ]);
 
         }
@@ -119,7 +119,7 @@ class EmployeeController extends Controller
                 'office_type' => $request->office_type,
                 'job_start_date' => $request->job_start_date,
                 'salery' => $request->salery,
-                'created_at' => now(),
+                'updated_at' => now(),
         ]);
 
         return redirect()->route('employee')->with('employee_update' , $request->name.' details update successfull');

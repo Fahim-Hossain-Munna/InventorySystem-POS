@@ -25,6 +25,7 @@ class ProfileSettingsController extends Controller
             'email' =>$request->email,
             'tel' =>$request->tel,
             'address' =>$request->address,
+            'updated_at' => now(),
          ]);
 
          if($request->hasFile('image')){
@@ -44,6 +45,7 @@ class ProfileSettingsController extends Controller
 
             User::find($id)->update([
                 'picture' =>$new_img,
+                'updated_at' => now(),
              ]);
          }
         return back()->with('sucessfully_update', "Your Profile Update Sucessfully!");

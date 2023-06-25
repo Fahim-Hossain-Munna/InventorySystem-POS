@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Auth;
     // ProfileSettingsController
     Route::get('/profile/settings', [App\Http\Controllers\ProfileSettingsController::class, 'settings'])->name('settings');
     Route::post('/profile/settings/update/{id}', [App\Http\Controllers\ProfileSettingsController::class, 'settings_update'])->name('settings.update');
-    Route::post('/profile/password/update/{id}', [App\Http\Controllers\ProfileSettingsController::class, 'password_update'])->name('password.update');
+    Route::post('/profile/password/update/{id}', [App\Http\Controllers\ProfileSettingsController::class, 'password_update'])->name('password.edit');
 
     // EmployeesController
     Route::get('/employee', [App\Http\Controllers\EmployeeController::class, 'employee'])->name('employee');
@@ -43,9 +43,12 @@ use Illuminate\Support\Facades\Auth;
 
     // ExpenseController
     Route::get('/expense', [App\Http\Controllers\ExpenseController::class, 'expense'])->name('expense.view');
+    Route::get('/expense/today', [App\Http\Controllers\ExpenseController::class, 'expense_today'])->name('expense.today');
     Route::post('/expense/db/insert', [App\Http\Controllers\ExpenseController::class, 'expense_insert'])->name('expense.insert');
+    Route::post('/expense/db/edit/{id}', [App\Http\Controllers\ExpenseController::class, 'expense_edit'])->name('expense.edit');
+    Route::post('/expense/db/delete/{id}', [App\Http\Controllers\ExpenseController::class, 'expense_delete'])->name('expense.delete');
 
-    // ExpenseController
+    // VariationController
     Route::get('/variation', [App\Http\Controllers\VariationController::class, 'variation'])->name('variation.view');
 
     // CategoryController

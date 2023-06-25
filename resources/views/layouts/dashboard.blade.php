@@ -117,9 +117,8 @@
                         <a href="{{ route('employee') }}"> <i class="menu-icon fa fa-users"></i>Employees</a>
                     </li>
                     <li class="menu-title">Accounts</li><!-- /.menu-title -->
-                    <li class="menu-item-has-children dropdown">
-                        <a href="{{ route('expense.view') }}" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"> <i class="menu-icon fa fa-money"></i>Regular Expense</a>
+                    <li class="{{ Request::is('expense.view') ? 'active' : '' }}">
+                        <a href="{{ route('expense.view') }}"> <i class="menu-icon fa fa-money"></i>Regular Expense</a>
                     </li>
                     {{-- <li class="menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
