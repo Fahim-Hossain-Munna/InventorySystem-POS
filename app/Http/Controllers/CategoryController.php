@@ -35,8 +35,13 @@ class CategoryController extends Controller
         return back()->with('category_insert' , 'Category submit successfully');
     }
 
-    public function category_details($id){
-        $categories = category::find($id);
-        return view('dashboard.variation.category.category_details', compact('categories'));
+    // public function category_details($id){
+    //     $categories = category::find($id);
+    //     return view('dashboard.variation.category.category_details', compact('categories'));
+    // }
+
+    public function category_delete($id){
+        category::find($id)->delete();
+        return back()->with("category_delete", 'Category Delete sucessfully!');
     }
 }
