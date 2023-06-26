@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class supplier extends Model
 {
     use HasFactory;
+    function relationshipWithBrand(){
+        return $this->hasOne(brand::class, 'id', 'brand_id');
+    }
 }
