@@ -18,14 +18,23 @@ class SupplierController extends Controller
     public function index()
     {
         $employees = Employee::all();
+        $suppliers = supplier::all();
         $brands = brand::all();
-        return view('dashboard.supplier.index',compact('employees', 'brands'));
+        return view('dashboard.supplier.index',compact('employees', 'brands', 'suppliers'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create()
+    {
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
         $request->validate([
             "*" => 'required',
@@ -40,7 +49,8 @@ class SupplierController extends Controller
         supplier::insert([
             'name' => $request->name,
             'email' => $request->email,
-            'supplier_brand' => $request->supplier_brand,
+            'tel' => $request->tel,
+            'supplier_brand_id' => $request->supplier_brand_id,
             'supplier_type' => $request->supplier_type,
             'mobile_banking' => $request->mobile_banking,
             'Mobile_banking_Account_number' => $request->Mobile_banking_Account_number,
@@ -50,18 +60,10 @@ class SupplierController extends Controller
             'bank_account_number' => $request->bank_account_number,
             'current_address' => $request->current_address,
             'parmanent_address' => $request->parmanent_address,
-            'image' => $request->image,
+            'image' => $new_img,
             'created_at' => now(),
         ]);
-        return back()->with('brand_insert' , 'Brand Added successfully');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return back()->with('supplier_insert' , 'Supplier Added successfully');
     }
 
     /**
