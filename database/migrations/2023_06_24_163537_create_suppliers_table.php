@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->longText('tel');
-            $table->string('supplier_brand_id');
+            $table->string('supplier_brand_name');
             $table->string('supplier_type');
             $table->string('mobile_banking');
             $table->string('Mobile_banking_Account_number');

@@ -103,7 +103,6 @@ class EmployeeController extends Controller
                     'picture' => $new_img,
                     'updated_at' => now(),
                 ]);
-
         }
 
         Employee::findOrFail($id)->update([

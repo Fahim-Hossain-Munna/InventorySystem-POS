@@ -84,10 +84,10 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label for="cc-number" class="control-label mb-1">Supplier Brand</label>
-                                                        <select name="supplier_brand_id" id="select" class="form-control">
+                                                        <select name="supplier_brand_name" id="select" class="form-control">
                                                             <option>Please select</option>
                                                             @foreach ($brands as $brand)
-                                                                <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
+                                                                <option value="{{ $brand->brand_name }}">{{ $brand->brand_name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -217,7 +217,7 @@
                             <tr>
                                 <td>{{ $loop->index +1 }}</td>
                                 <td>
-                                    @if ($supplier->picture == 'defult_photo.jpg')
+                                    @if ($supplier->image == 'defult_photo.jpg')
                                         <img style="width: 80px; height:80px;" class="user-avatar rounded-circle"
                                         src="{{ asset('uploads/profile_photos') }}/defult_photo.jpg" alt="profile">
                                     @else
@@ -252,8 +252,7 @@
                                                                         <hr>
                                                                         <form action="{{ route('supplier.update',$supplier->id) }}" method="POST" enctype="multipart/form-data">
                                                                             @csrf
-
-
+                                                                            @method('PATCH')
                                                                             <div class="form-group">
                                                                                 <label for="cc-payment" class="control-label mb-1">Full Name</label>
                                                                                 <input id="cc-payment" name="name" type="text"
@@ -274,35 +273,36 @@
                                                                                 <div class="col-lg-6">
                                                                                     <div class="form-group">
                                                                                         <label for="cc-number" class="control-label mb-1">Supplier Brand</label>
-                                                                                        <select name="supplier_brand_id" id="select" class="form-control">
+                                                                                        <select name="supplier_brand_name" id="select" class="form-control">
                                                                                             <option>Please select</option>
-                                                                                            @foreach ($brands as $brand)
-                                                                                                <option value="{{ $brand->id }}">{{ $brand->brand_name }}</option>
-                                                                                            @endforeach
+                                                                                                @foreach ($brands as $brand)
+                                                                                                    <option value="{{ $brand->brand_name }}" {{ $supplier->supplier_brand_name ==  $brand->brand_name ? 'selected':'' }}>{{ $brand->brand_name }}</option>
+                                                                                                @endforeach
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-lg-6">
+                                                                                    <div class="form-group">
+                                                                                        <label for="cc-number" class="control-label mb-1">Supplier Type</label>
+                                                                                        <select name="supplier_type" id="select" class="form-control">
+                                                                                            <option>Please select</option>
+                                                                                            <option value="distributor" {{ $supplier->supplier_type == 'distributor' ? 'selected':'' }}>Distributor</option>
+                                                                                            <option value="local_seller" {{ $supplier->supplier_type == 'local_seller' ? 'selected':'' }}>Local Seller</option>
+                                                                                            <option value="hole_seller" {{ $supplier->supplier_type == 'hole_seller' ? 'selected':'' }}>Hole Seller</option>
                                                                                         </select>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="col-lg-6">
-                                                                                <div class="form-group">
-                                                                                    <label for="cc-number" class="control-label mb-1">Supplier Type</label>
-                                                                                    <select name="supplier_type" id="select" class="form-control">
-                                                                                        <option>Please select</option>
-                                                                                        <option value="Distributor">Distributor</option>
-                                                                                        <option value="Local Seller">Local Seller</option>
-                                                                                        <option value="Hole Seller">Hole Seller</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
+
                                                                             <div class="row">
                                                                                 <div class="col-6">
                                                                                     <label for="cc-number" class="control-label mb-1">Mobile Bangking</label>
                                                                                     <select name="mobile_banking" id="select" class="form-control">
                                                                                         <option>Please select</option>
-                                                                                        <option value="bikash">Bikash</option>
-                                                                                        <option value="nagad">Nagad</option>
-                                                                                        <option value="rocket">Rocket</option>
-                                                                                        <option value="upay">Upay</option>
+                                                                                        <option value="bikash" {{ $supplier->mobile_banking == 'bikash' ? 'selected':'' }}>Bikash</option>
+                                                                                        <option value="nagad" {{ $supplier->mobile_banking == 'nagad' ? 'selected':'' }}>Nagad</option>
+                                                                                        <option value="rocket" {{ $supplier->mobile_banking == 'rocket' ? 'selected':'' }}>Rocket</option>
+                                                                                        <option value="upay" {{ $supplier->mobile_banking == 'upay' ? 'selected':'' }}>Upay</option>
                                                                                     </select>
                                                                                 </div>
                                                                                 <div class="col-6">
@@ -378,14 +378,14 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                                                                <button type="submit" class="btn btn-success">Save changes</button>
+                                                            </div>
                                                         </div>
                                                     </div> <!-- .card -->
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-success">Save changes</button>
-                                                </div>
+
                                             </form>
                                             </div>
                                         </div>
@@ -565,7 +565,7 @@
 @endif --}}
 
 
-{{-- @if (session('employee_update'))
+@if (session('supplier_update'))
     <script>
         const Toast = Swal.mixin({
         toast: true,
@@ -581,9 +581,9 @@
 
         Toast.fire({
         icon: 'success',
-        title: "{{ session('employee_update') }}",
+        title: "{{ session('supplier_update') }}",
     })
     </script>
-@endif --}}
+@endif
 
 @endsection

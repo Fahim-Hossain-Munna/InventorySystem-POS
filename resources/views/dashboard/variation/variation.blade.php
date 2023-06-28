@@ -58,7 +58,7 @@
                                     <input id="" name="category_image" type="file" class="form-control mb-2" value="">
                                 </div>
                                 <div>
-                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>
+                                {{-- <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button> --}}
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                                     <input id="" name="brand_image" type="file" class="form-control mb-2" value="">
                                 </div>
                                 <div>
-                                <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Brand</button>
+                                {{-- <button type="button" class="btn btn-primary btn-lg mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Brand</button> --}}
                                 </div>
                             </div>
                         </div>
